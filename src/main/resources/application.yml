@@ -1,0 +1,64 @@
+hosts:
+  postgresql: defalt.local:5432
+  keycloak: osm.keycloak:8080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 4MB
+      max-request-size: 4MB
+  datasource:
+    url: jdbc:postgresql://${hosts.postgresql}/osm
+    username: osm-core
+    password: osm-core
+  jpa:
+    properties:
+      hibernate:
+        default_schema: osm_content
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: ${spring.jpa.properties.hibernate.default_schema}
+    baseline-on-migrate: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keyclock:
+            client-id: osm.core
+            client-secret:
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keyclock:
+            issuer-uri: http://${hosts.keycloak}/realms/osm
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://${hosts.keycloak}/realms/osm
+          jwk-set-uri: http://${hosts.keycloak}/realms/osm/protocol/openid-connect/certs
+
+keycloak-server:
+  url: http://${hosts.keycloak}
+  username: osm
+  password: osm
+  client-secret: 4WGszPOyoAvVDqri5NAn6weM2KiTmtXf
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+server:
+  tomcat:
+    threads:
+      max: 200
+    max-connections: 2000
+  servlet:
+    context-path: /file
+  port: 8070
