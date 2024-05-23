@@ -42,12 +42,6 @@ spring:
           issuer-uri: http://${hosts.keycloak}/realms/osm
           jwk-set-uri: http://${hosts.keycloak}/realms/osm/protocol/openid-connect/certs
 
-keycloak-server:
-  url: http://${hosts.keycloak}
-  username: osm
-  password: osm
-  client-secret: 4WGszPOyoAvVDqri5NAn6weM2KiTmtXf
-
 logging:
   level:
     org:

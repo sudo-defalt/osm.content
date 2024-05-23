@@ -10,7 +10,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 public class UserSecurityContext {
     private final SecurityContextImpl context;
     private final String username;
-    private UserRepresentation keycloakUser;
 
     protected UserSecurityContext(SecurityContextImpl context) {
         this.context = context;
@@ -30,13 +29,6 @@ public class UserSecurityContext {
 
     public static UserSecurityContext getCurrentUser() {
         return new UserSecurityContext((SecurityContextImpl) SecurityContextHolder.getContext());
-    }
-
-    public UserRepresentation getKeycloakUser() {
-        if (this.keycloakUser == null && this.username != null)
-            return this.keycloakUser = KeyCloakAdmin.getInstance().getUser(this.username);
-        else
-            return this.keycloakUser;
     }
 
     public SecurityContextImpl getContext() {
