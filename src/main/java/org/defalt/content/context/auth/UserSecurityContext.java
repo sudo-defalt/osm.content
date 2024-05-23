@@ -2,7 +2,6 @@ package org.defalt.content.context.auth;
 
 import org.defalt.content.entity.User;
 import org.defalt.content.service.UserService;
-import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.oauth2.jwt.Jwt;
