@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MinioConfiguration {
     @Bean
-    public MinioClient client(@Value("hosts.minio") String host) {
+    public MinioClient client(@Value("${hosts.minio}") String host) {
         return MinioClient.builder()
                 .endpoint(host)
                 .credentials("minioadmin", "minioadmin")
