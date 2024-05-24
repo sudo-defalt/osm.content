@@ -1,3 +1,4 @@
 hosts:
   postgresql: osm.postgresql:5432
   keycloak: osm.keycloak:8080
+  minio: osm.minio:9000

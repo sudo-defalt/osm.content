@@ -1,6 +1,7 @@
 hosts:
   postgresql: defalt.local:5432
   keycloak: osm.keycloak:8080
+  minio: defalt.local:9000
 
 spring:
   servlet:
